@@ -1,0 +1,18 @@
+<launch>
+
+	<!-- Start USB Cam -->
+	<!-- <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" /> -->
+
+	<!-- RVIZ -->
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find pose_predictor)/rviz/test.rviz" />
+
+	<!-- Pose estimator -->
+	<include file="$(find tfpose_ros)/launch/tfpose_ros.launch" >
+		<arg name="visualize" value="true" />
+		<arg name="camera" value="usb_cam" />
+	</include>
+
+	<!-- Predictor -->
+	<node name="predictor" pkg="pose_predictor" type="pose_predict.py" output="screen"/>
+
+</launch>
